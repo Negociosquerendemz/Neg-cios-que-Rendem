@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="pt-MZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Negócios Que Rendem — Ebook para Moçambicanos</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap');
+
+  :root{
+    --emerald-deep:#0a3326;
+    --emerald:#0f4a37;
+    --emerald-light:#15614a;
+    --amber:#e8a33d;
+    --amber-light:#f4c878;
+    --coral:#ef5b3a;
+    --coral-dark:#c8451f;
+    --cream:#f6f1e4;
+    --cream-dim:#cfd9d1;
+    --ink:#0a1410;
+    --rule: rgba(232,163,61,0.25);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter', sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.55;
+  }
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--coral); outline-offset:3px;}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+  .display{font-family:'Space Grotesk', sans-serif;}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    background:var(--emerald-deep);
+    border-bottom:1px solid var(--rule);
+    position:sticky; top:0; z-index:50;
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 24px; max-width:1080px; margin:0 auto;
+  }
+  .nav-logo{
+    color:var(--cream); font-weight:700; font-size:15px; letter-spacing:0.5px;
+  }
+  .nav-logo span{color:var(--amber);}
+  .nav-cta{
+    background:var(--coral); color:#fff; font-weight:600; font-size:13px;
+    padding:9px 16px; border-radius:30px; text-decoration:none;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{background:var(--coral-dark);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      radial-gradient(circle at 85% 0%, rgba(232,163,61,0.18), transparent 55%),
+      linear-gradient(180deg, var(--emerald-deep) 0%, var(--emerald) 100%);
+    color:var(--cream);
+    padding:56px 0 48px;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;
+  }
+  .eyebrow{
+    color:var(--amber-light); font-size:12px; letter-spacing:2.5px; text-transform:uppercase;
+    font-weight:600; margin-bottom:14px;
+  }
+  .hero h1{
+    font-size:38px; line-height:1.12; font-weight:700; letter-spacing:-0.5px;
+    margin-bottom:16px;
+  }
+  .hero h1 em{
+    font-style:normal; color:var(--amber-light);
+  }
+  .hero p.sub{
+    font-size:16px; color:var(--cream-dim); max-width:460px; margin-bottom:26px;
+  }
+  .btn-primary{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--coral); color:#fff; font-weight:700; font-size:15.5px;
+    padding:15px 26px; border-radius:8px; text-decoration:none;
+    box-shadow:0 14px 30px -10px rgba(239,91,58,0.55);
+    transition:transform 0.15s ease, background 0.15s ease;
+  }
+  .btn-primary:hover{background:var(--coral-dark); transform:translateY(-1px);}
+  .hero-note{
+    margin-top:12px; font-size:12.5px; color:var(--cream-dim);
+  }
+  .hero-note b{color:var(--amber-light);}
+
+  /* book mockup */
+  .book-stage{display:flex; justify-content:center;}
+  .book{
+    width:230px; aspect-ratio:3/4;
+    background:linear-gradient(160deg, var(--emerald-light) 0%, var(--emerald-deep) 100%);
+    border:1px solid rgba(232,163,61,0.4);
+    border-radius:6px;
+    transform:rotate(4deg);
+    box-shadow:0 30px 50px -20px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,0,0,0.2);
+    padding:22px 18px;
+    display:flex; flex-direction:column; justify-content:space-between;
+    position:relative;
+  }
+  .book::before{
+    content:""; position:absolute; left:14px; top:0; bottom:0; width:1px;
+    background:rgba(232,163,61,0.3);
+  }
+  .book-eyebrow{font-size:9.5px; letter-spacing:2px; color:var(--amber-light); text-transform:uppercase;}
+  .book-title{
+    font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:21px; color:var(--cream);
+    line-height:1.15; margin-top:8px;
+  }
+  .book-sub{font-size:10.5px; color:var(--cream-dim); margin-top:10px;}
+  .book-tag{
+    align-self:flex-start; background:var(--amber); color:var(--ink);
+    font-size:10px; font-weight:700; padding:4px 9px; border-radius:4px;
+  }
+
+  /* ---------- TICKER ---------- */
+  .ticker-strip{
+    background:var(--ink); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
+    overflow:hidden; padding:11px 0;
+  }
+  .ticker-track{
+    display:flex; gap:40px; white-space:nowrap;
+    animation:scroll-left 32s linear infinite;
+    width:max-content;
+  }
+  .ticker-track span{
+    font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--amber-light);
+    letter-spacing:0.3px;
+  }
+  @keyframes scroll-left{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ticker-track{animation:none;}
+  }
+
+  /* ---------- SECTION GENERIC ---------- */
+  section.block{padding:60px 0;}
+  .section-head{text-align:center; max-width:560px; margin:0 auto 40px;}
+  .section-eyebrow{
+    font-size:11.5px; letter-spacing:2px; text-transform:uppercase; color:var(--coral-dark);
+    font-weight:700; margin-bottom:10px;
+  }
+  .section-title{
+    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:28px; letter-spacing:-0.3px;
+  }
+
+  /* ---------- PROBLEM ---------- */
+  .problem-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .problem-card{
+    background:#fff; border:1px solid rgba(10,20,16,0.08); border-radius:10px; padding:24px 20px;
+  }
+  .problem-num{
+    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--coral-dark); font-weight:600;
+  }
+  .problem-card h3{font-size:16px; margin:10px 0 6px; font-weight:700;}
+  .problem-card p{font-size:13.5px; color:#4a4a44;}
+  .problem-transition{
+    text-align:center; margin-top:30px; font-family:'Space Grotesk',sans-serif;
+    font-weight:700; font-size:18px; color:var(--emerald-deep);
+  }
+
+  /* ---------- CHAPTERS ---------- */
+  .chapters-block{background:var(--emerald-deep); color:var(--cream);}
+  .chapters-block .section-eyebrow{color:var(--amber-light);}
+  .chapters-block .section-title{color:var(--cream);}
+  .chapter-list{display:flex; flex-direction:column; gap:0; max-width:680px; margin:0 auto;}
+  .chapter-row{
+    display:flex; gap:18px; padding:18px 0; border-bottom:1px solid rgba(246,241,228,0.12);
+    align-items:flex-start;
+  }
+  .chapter-row:last-child{border-bottom:none;}
+  .chapter-no{
+    font-family:'JetBrains Mono', monospace; font-weight:600; color:var(--amber); font-size:14px;
+    flex:0 0 32px;
+  }
+  .chapter-row h4{font-size:15.5px; font-weight:700; margin-bottom:3px;}
+  .chapter-row p{font-size:13.5px; color:var(--cream-dim);}
+
+  /* ---------- FIT ---------- */
+  .fit-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px; max-width:760px; margin:0 auto;}
+  .fit-card{border-radius:10px; padding:24px 22px;}
+  .fit-yes{background:rgba(15,74,55,0.07); border:1px solid rgba(15,74,55,0.18);}
+  .fit-no{background:rgba(239,91,58,0.06); border:1px solid rgba(239,91,58,0.18);}
+  .fit-card h4{font-size:15px; font-weight:700; margin-bottom:14px;}
+  .fit-card ul{list-style:none; display:flex; flex-direction:column; gap:10px;}
+  .fit-card li{font-size:13.5px; display:flex; gap:9px; align-items:flex-start; color:#3a3a35;}
+  .fit-mark{font-weight:700; flex:0 0 16px;}
+  .fit-yes .fit-mark{color:var(--emerald);}
+  .fit-no .fit-mark{color:var(--coral-dark);}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testi-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .testi-card{
+    background:#fff; border:1px solid rgba(10,20,16,0.08); border-radius:10px; padding:22px;
+  }
+  .testi-quote{font-size:13.5px; color:#3a3a35; margin-bottom:14px;}
+  .testi-name{font-size:12.5px; font-weight:700; color:var(--emerald-deep);}
+  .testi-stars{color:var(--amber); font-size:13px; margin-bottom:8px;}
+
+  /* ---------- OFFER ---------- */
+  .offer-block{background:linear-gradient(180deg, #f1e9d6 0%, var(--cream) 100%);}
+  .offer-card{
+    max-width:520px; margin:0 auto; background:#fff; border-radius:16px;
+    border:1px solid rgba(10,20,16,0.08);
+    box-shadow:0 30px 60px -25px rgba(10,20,16,0.25);
+    padding:34px 30px; text-align:center;
+  }
+  .offer-includes{list-style:none; text-align:left; margin:22px 0; display:flex; flex-direction:column; gap:11px;}
+  .offer-includes li{font-size:14px; display:flex; gap:10px; color:#3a3a35;}
+  .offer-includes li b{color:var(--ink);}
+  .price-row{display:flex; align-items:baseline; justify-content:center; gap:12px; margin:18px 0 4px;}
+  .price-old{font-family:'JetBrains Mono',monospace; text-decoration:line-through; color:#9a958a; font-size:16px;}
+  .price-new{font-family:'Space Grotesk',sans-serif; font-weight:800; font-size:34px; color:var(--coral-dark);}
+  .price-unit{font-size:13px; color:#6b6760;}
+  .guarantee{
+    margin-top:18px; font-size:12.5px; color:var(--emerald-deep); font-weight:600;
+    display:flex; align-items:center; justify-content:center; gap:6px;
+  }
+  .pay-methods{margin-top:14px; font-size:11.5px; color:#7a766b;}
+
+  /* ---------- FAQ ---------- */
+  .faq-list{max-width:680px; margin:0 auto; display:flex; flex-direction:column; gap:10px;}
+  details{
+    background:#fff; border:1px solid rgba(10,20,16,0.08); border-radius:8px; padding:4px 18px;
+  }
+  summary{
+    cursor:pointer; font-weight:600; font-size:14.5px; padding:14px 0; list-style:none;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  summary::-webkit-details-marker{display:none;}
+  summary::after{content:"+"; color:var(--coral-dark); font-size:18px; font-weight:700;}
+  details[open] summary::after{content:"–";}
+  details p{font-size:13.5px; color:#4a4a44; padding-bottom:16px;}
+
+  /* ---------- FINAL CTA ---------- */
+  .final-cta{
+    background:var(--ink); color:var(--cream); text-align:center; padding:64px 0;
+  }
+  .final-cta h2{font-family:'Space Grotesk',sans-serif; font-size:27px; font-weight:700; margin-bottom:10px;}
+  .final-cta p{color:var(--cream-dim); font-size:14.5px; margin-bottom:26px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink); border-top:1px solid rgba(246,241,228,0.1); padding:22px 0 30px; text-align:center;}
+  footer p{font-size:11.5px; color:#8a857a; max-width:520px; margin:6px auto 0;}
+  footer .pay{color:var(--cream-dim); font-size:12px; font-weight:600;}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:760px){
+    .hero-grid{grid-template-columns:1fr; text-align:center;}
+    .hero p.sub{margin-left:auto; margin-right:auto;}
+    .hero-note{text-align:center;}
+    .problem-grid{grid-template-columns:1fr;}
+    .fit-grid{grid-template-columns:1fr;}
+    .testi-grid{grid-template-columns:1fr;}
+    .hero h1{font-size:30px;}
+    .section-title{font-size:23px;}
+  }
+</style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-logo">NEGÓCIOS QUE <span>RENDEM</span></div>
+      <a href="#oferta" class="nav-cta">Comprar agora</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Ebook digital · feito para Moçambique</div>
+        <h1 class="display">Negócios que rendem, mesmo começando com <em>pouco dinheiro</em>.</h1>
+        <p class="sub">Um guia direto ao ponto com ideias de negócio testadas na realidade moçambicana — para começares este mês, não no próximo ano.</p>
+        <a href="#oferta" class="btn-primary">Quero o meu exemplar →</a>
+        <div class="hero-note">Pagamento por <b>M-Pesa</b> ou <b>e-Mola</b> · Acesso imediato após a compra</div>
+      </div>
+      <div class="book-stage">
+        <div class="book">
+          <div>
+            <div class="book-eyebrow">Guia prático 2026</div>
+            <div class="book-title">NEGÓCIOS<br>QUE<br>RENDEM</div>
+          </div>
+          <div>
+            <div class="book-sub">6 capítulos · ideias reais para o contexto moçambicano</div>
+            <div class="book-tag">EBOOK DIGITAL</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="ticker-strip" aria-hidden="true">
+    <div class="ticker-track">
+      <span>💡 REVENDA DE ROUPA EM 2ª MÃO</span>
+      <span>📦 COMÉRCIO INFORMAL</span>
+      <span>📱 GESTÃO DE REDES SOCIAIS PARA PMEs</span>
+      <span>🍗 AVICULTURA EM PEQUENA ESCALA</span>
+      <span>🛵 ENTREGAS E DELIVERY LOCAL</span>
+      <span>💻 CRIAÇÃO DE PÁGINAS E LOJAS ONLINE</span>
+      <span>💡 REVENDA DE ROUPA EM 2ª MÃO</span>
+      <span>📦 COMÉRCIO INFORMAL</span>
+      <span>📱 GESTÃO DE REDES SOCIAIS PARA PMEs</span>
+      <span>🍗 AVICULTURA EM PEQUENA ESCALA</span>
+      <span>🛵 ENTREGAS E DELIVERY LOCAL</span>
+      <span>💻 CRIAÇÃO DE PÁGINAS E LOJAS ONLINE</span>
+    </div>
+  </div>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-eyebrow">O problema</div>
+        <h2 class="section-title">Reconheces-te nisto?</h2>
+      </div>
+      <div class="problem-grid">
+        <div class="problem-card">
+          <div class="problem-num mono">01</div>
+          <h3>Capital pouco</h3>
+          <p>Achas que precisas de milhares de meticais para começar — e isso trava-te antes de tentares.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-num mono">02</div>
+          <h3>Não sabes por onde começar</h3>
+          <p>Tens ideias, mas não sabes qual delas funciona mesmo na tua zona e com o teu orçamento.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-num mono">03</div>
+          <h3>Medo de arriscar</h3>
+          <p>Já viste negócios fecharem à tua volta e não queres repetir o mesmo erro.</p>
+        </div>
+      </div>
+      <p class="problem-transition">Este ebook foi feito para resolver os três.</p>
+    </div>
+  </section>
+
+  <section class="block chapters-block">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-eyebrow">Dentro do ebook</div>
+        <h2 class="section-title">O que vais encontrar</h2>
+      </div>
+      <div class="chapter-list">
+        <div class="chapter-row">
+          <div class="chapter-no">01</div>
+          <div>
+            <h4>Como escolher o negócio certo</h4>
+            <p>Avalia o teu capital, tempo e contexto antes de decidires onde investir energia.</p>
+          </div>
+        </div>
+        <div class="chapter-row">
+          <div class="chapter-no">02</div>
+          <div>
+            <h4>Revenda e comércio</h4>
+            <p>Roupa em 2ª mão, pequenas importações e produtos de giro rápido no mercado local.</p>
+          </div>
+        </div>
+        <div class="chapter-row">
+          <div class="chapter-no">03</div>
+          <div>
+            <h4>Serviços digitais</h4>
+            <p>Gestão de redes sociais, design simples e freelance para quem tem um smartphone e tempo livre.</p>
+          </div>
+        </div>
+        <div class="chapter-row">
+          <div class="chapter-no">04</div>
+          <div>
+            <h4>Pequenos negócios físicos</h4>
+            <p>Avicultura, alimentação e outras ideias com baixo investimento inicial.</p>
+          </div>
+        </div>
+        <div class="chapter-row">
+          <div class="chapter-no">05</div>
+          <div>
+            <h4>Vender online</h4>
+            <p>WhatsApp Business, redes sociais e marketplaces para chegar a clientes sem loja física.</p>
+          </div>
+        </div>
+        <div class="chapter-row">
+          <div class="chapter-no">06</div>
+          <div>
+            <h4>Plano de 30 dias</h4>
+            <p>Um roteiro passo a passo para começares o teu negócio ainda este mês.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-eyebrow">É para ti?</div>
+        <h2 class="section-title">Para quem é — e para quem não é</h2>
+      </div>
+      <div class="fit-grid">
+        <div class="fit-card fit-yes">
+          <h4>✅ É para ti se:</h4>
+          <ul>
+            <li><span class="fit-mark">✓</span>Queres começar um negócio com o que já tens</li>
+            <li><span class="fit-mark">✓</span>Tens tempo livre e queres transformá-lo em renda</li>
+            <li><span class="fit-mark">✓</span>Preferes um plano claro em vez de teoria solta</li>
+          </ul>
+        </div>
+        <div class="fit-card fit-no">
+          <h4>❌ Não é para ti se:</h4>
+          <ul>
+            <li><span class="fit-mark">✕</span>Procuras "dinheiro fácil" sem trabalhar</li>
+            <li><span class="fit-mark">✕</span>Não estás disposto a agir depois de ler</li>
+            <li><span class="fit-mark">✕</span>Esperas resultados garantidos em poucos dias</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-eyebrow">Depoimentos</div>
+        <h2 class="section-title">O que dizem os leitores</h2>
+      </div>
+      <!-- Exemplos ilustrativos — substitui por depoimentos reais à medida que tiveres compradores -->
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"Comecei a revender roupa com o capital que já tinha guardado no telemóvel. Em duas semanas tive o primeiro lucro."</p>
+          <div class="testi-name">Amélia · Nampula</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"O capítulo sobre redes sociais para PMEs mudou a forma como ofereço os meus serviços a pequenos negócios."</p>
+          <div class="testi-name">Edson · Pemba</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"Finalmente um guia sem enrolação, direto para a nossa realidade."</p>
+          <div class="testi-name">Ivone · Maputo</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block offer-block" id="oferta">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-eyebrow">Oferta</div>
+        <h2 class="section-title">Tudo o que recebes hoje</h2>
+      </div>
+      <div class="offer-card">
+        <ul class="offer-includes">
+          <li>📘 <b>Ebook completo</b> — PDF, leitura fácil no telemóvel</li>
+          <li>🎁 <b>Bónus 1:</b> Lista de fornecedores e contactos úteis</li>
+          <li>🎁 <b>Bónus 2:</b> Modelo simples de plano financeiro</li>
+          <li>🎁 <b>Bónus 3:</b> Acesso ao grupo de apoio no WhatsApp</li>
+        </ul>
+        <div class="price-row">
+          <span class="price-old mono">700 MZN</span>
+          <span class="price-new">350 MZN</span>
+        </div>
+        <div class="price-unit">pagamento único · sem mensalidades</div>
+        <a href="#" class="btn-primary" style="margin-top:20px;">Garantir o meu ebook agora →</a>
+        <div class="guarantee">🛡️ Garantia de 7 dias — não gostaste, devolvemos o dinheiro</div>
+        <div class="pay-methods">Pagamento seguro via M-Pesa ou e-Mola</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-eyebrow">Dúvidas</div>
+        <h2 class="section-title">Perguntas frequentes</h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>Como recebo o ebook depois de pagar?</summary>
+          <p>Por email ou WhatsApp, em formato PDF, normalmente em poucos minutos após a confirmação do pagamento.</p>
+        </details>
+        <details>
+          <summary>Funciona para qualquer província?</summary>
+          <p>Sim. As ideias foram pensadas para a realidade moçambicana em geral, com exemplos que se aplicam tanto a zonas urbanas como rurais.</p>
+        </details>
+        <details>
+          <summary>Preciso de muito dinheiro para começar?</summary>
+          <p>Não. A maioria das ideias do ebook pode começar com o que já tens — mesmo que seja pouco.</p>
+        </details>
+        <details>
+          <summary>Que métodos de pagamento aceitam?</summary>
+          <p>M-Pesa e e-Mola.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <div class="wrap">
+      <h2 class="display">Não precisas de sorte. Precisas de um plano.</h2>
+      <p>350 MZN, pagamento único, acesso imediato.</p>
+      <a href="#oferta" class="btn-primary">Quero começar agora →</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="pay">M-Pesa · e-Mola</div>
+    <p>Os resultados variam de acordo com o esforço, contexto e dedicação de cada pessoa. Este ebook é um guia de ideias e estratégias — não uma promessa de rendimento.</p>
+  </footer>
+
+</body>
+</html>
